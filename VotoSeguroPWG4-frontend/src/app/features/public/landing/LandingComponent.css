@@ -1,0 +1,69 @@
+.landing-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: radial-gradient(circle at top, #1a237e, #0d1117);
+  color: #fff;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.landing-card {
+  background: rgba(13, 17, 23, 0.9);
+  padding: 3rem 4rem;
+  border-radius: 16px;
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.5);
+  text-align: center;
+  max-width: 480px;
+  width: 90%;
+}
+
+.landing-card h1 {
+  margin-bottom: 0.5rem;
+  font-size: 2.4rem;
+}
+
+.landing-card p {
+  margin: 0.25rem 0;
+}
+
+.actions {
+  margin-top: 2rem;
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+}
+
+button {
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.95rem;
+  background: #ffca28;
+  color: #1a237e;
+  transition: transform 0.15s ease, box-shadow 0.15s ease, background 0.15s ease;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+  background: #ffd54f;
+}
+
+button.secondary {
+  background: transparent;
+  color: #ffca28;
+  border: 1px solid #ffca28;
+}
+
+button.secondary:hover {
+  background: rgba(255, 202, 40, 0.12);
+}
+
+.note {
+  margin-top: 1.5rem;
+  font-size: 0.8rem;
+  opacity: 0.8;
+}

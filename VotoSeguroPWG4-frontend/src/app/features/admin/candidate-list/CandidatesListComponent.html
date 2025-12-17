@@ -1,0 +1,49 @@
+
+<div class="page">
+  <div class="header">
+    <button class="btn-link" (click)="goBack()">
+      ← Volver
+    </button>
+
+    <h2>Candidatos</h2>
+
+    <button class="btn-primary" (click)="goToCreate()">
+      Nuevo candidato
+    </button>
+  </div>
+
+  <p *ngIf="loading">Cargando candidatos...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table *ngIf="!loading && candidates.length > 0" class="table">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Partido</th>
+      <th>Votos</th>
+      <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let c of candidates">
+      <td>{{ c.name }}</td>
+      <td>{{ c.party }}</td>
+      <td>{{ c.voteCount || 0 }}</td>
+      <td>
+        <button class="btn-link" (click)="goToEdit(c)">Editar</button>
+        <button
+          class="btn-link danger"
+          [disabled]="!canDelete(c) || deletingId === c.id"
+          (click)="deleteCandidate(c)"
+        >
+          {{ deletingId === c.id ? 'Eliminando...' : 'Eliminar' }}
+        </button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && candidates.length === 0">
+    No hay candidatos registrados.
+  </p>
+</div>

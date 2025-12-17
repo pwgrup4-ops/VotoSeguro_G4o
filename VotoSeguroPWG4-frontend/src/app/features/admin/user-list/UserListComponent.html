@@ -1,0 +1,62 @@
+
+<div class="page">
+  <div class="header">
+    <button class="btn-link" (click)="goBack()">
+      ← Volver
+    </button>
+
+    <h2>Votantes</h2>
+
+    <div class="filters">
+      <input
+        type="text"
+        placeholder="Buscar por nombre o correo"
+        [value]="search"
+        (input)="onSearchChange($any($event.target).value)"
+      />
+
+      <select
+        [value]="statusFilter"
+        (change)="onStatusChange($any($event.target).value)"
+      >
+        <option value="all">Todos</option>
+        <option value="voted">Ya votaron</option>
+        <option value="notVoted">No han votado</option>
+      </select>
+    </div>
+  </div>
+
+  <p *ngIf="loading">Cargando votantes...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <table *ngIf="!loading && filtered.length" class="table">
+    <thead>
+    <tr>
+      <th>Nombre</th>
+      <th>Correo</th>
+      <th>Estado de voto</th>
+      <th>Candidato elegido</th>
+      <th>Fecha / hora</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let u of filtered">
+      <td>{{ u.fullname }}</td>
+      <td>{{ u.email }}</td>
+      <td>{{ u.hasVoted ? 'Ya votó' : 'No ha votado' }}</td>
+      <td>{{ u.votedForCandidateName || '—' }}</td>
+      <td>
+        {{ u.voteTimestamp ? (u.voteTimestamp | date: 'short') : '—' }}
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <p *ngIf="!loading && !filtered.length && users.length">
+    No se encontraron votantes con esos filtros.
+  </p>
+
+  <p *ngIf="!loading && !users.length && !error">
+    No hay votantes registrados.
+  </p>
+</div>

@@ -1,0 +1,43 @@
+
+<div class="admin-page">
+  <header class="admin-header">
+    <h1>Panel de administración</h1>
+
+    <div class="header-actions">
+      <button class="btn-outline" (click)="goHome()">
+        Ir a inicio
+      </button>
+      <button class="btn-danger" (click)="logout()">
+        Cerrar sesión
+      </button>
+    </div>
+  </header>
+
+  <main class="admin-main">
+    <section class="card">
+      <h2>Gestión de candidatos</h2>
+      <p>
+        Administra los candidatos del sistema: crea nuevos, edita información
+        o elimina aquellos que aún no tienen votos registrados.
+      </p>
+
+      <button class="btn-primary" (click)="goToCandidates()">
+        Gestionar candidatos
+      </button>
+    </section>
+
+    <section class="card">
+      <h2>Gestión de votantes</h2>
+      <p>
+        Revisa qué usuarios han votado, por quién lo hicieron y filtra por
+        estado de voto para auditorías rápidas.
+      </p>
+
+      <button class="btn-primary" (click)="goToUsers()">
+        Ver votantes
+      </button>
+    </section>
+  </main>
+</div>
+
+

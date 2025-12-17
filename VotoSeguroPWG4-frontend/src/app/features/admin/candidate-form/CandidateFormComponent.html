@@ -1,0 +1,62 @@
+
+<div class="page">
+  <div class="header">
+    <h2>{{ isEditMode ? 'Editar candidato' : 'Nuevo candidato' }}</h2>
+    <button class="btn-secondary" [routerLink]="['/admin/candidates']">
+      Volver a la lista
+    </button>
+  </div>
+
+  <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" class="card">
+    <div class="form-row">
+      <label for="name">Nombre del candidato</label>
+      <input id="name" type="text" formControlName="name" />
+    </div>
+
+    <div class="form-row">
+      <label for="party">Partido</label>
+      <input id="party" type="text" formControlName="party" />
+    </div>
+
+    <div class="form-row">
+      <label for="photoUrl">URL de la foto</label>
+      <input id="photoUrl" type="text" formControlName="photoUrl" />
+    </div>
+
+    <div class="form-row">
+      <label for="logoUrl">URL del logo</label>
+      <input id="logoUrl" type="text" formControlName="logoUrl" />
+    </div>
+
+    <div class="form-row">
+      <label for="proposalsText">Propuestas (una por línea)</label>
+      <textarea id="proposalsText" rows="6" formControlName="proposalsText"></textarea>
+    </div>
+
+    <div class="error" *ngIf="submitError">
+      {{ submitError }}
+    </div>
+
+    <div class="success" *ngIf="successMessage">
+      {{ successMessage }}
+    </div>
+
+    <div class="actions">
+      <button
+        type="submit"
+        class="btn-primary"
+        [disabled]="loadingSubmit || candidateForm.invalid"
+      >
+        {{ isEditMode ? 'Guardar cambios' : 'Crear candidato' }}
+      </button>
+
+      <button
+        type="button"
+        class="btn-secondary"
+        [routerLink]="['/admin/candidates']"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</div>
