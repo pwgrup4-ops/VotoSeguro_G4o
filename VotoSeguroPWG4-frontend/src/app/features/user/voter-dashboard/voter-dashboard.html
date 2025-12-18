@@ -1,0 +1,48 @@
+
+
+<div class="results-wrapper">
+  <div class="results-card">
+
+    <div class="card-header">
+      <button class="btn-back" (click)="goBack()">
+        ← Regresar
+      </button>
+
+      <div class="card-title">
+        <h2>Resultados actuales</h2>
+        <p class="subtitle">
+          Total de votos emitidos: <strong>{{ totalVotes }}</strong>
+        </p>
+      </div>
+    </div>
+
+    <div *ngIf="loading" class="state-text">Cargando resultados...</div>
+    <div *ngIf="!loading && error" class="state-text error">
+      {{ error }}
+    </div>
+
+    <div *ngIf="!loading && !error && stats.length">
+      <div class="bar-row" *ngFor="let s of stats">
+        <div class="bar-header">
+          <div>
+            <div class="candidate-name">{{ s.name }}</div>
+            <div class="candidate-party">{{ s.party }}</div>
+          </div>
+          <div class="candidate-values">
+            {{ s.votes }} votos
+            ({{ s.percentage | number:'1.0-1' }}%)
+          </div>
+        </div>
+        <div class="bar-bg">
+          <div class="bar-fill" [style.width.%]="s.percentage"></div>
+        </div>
+      </div>
+    </div>
+
+    <p *ngIf="!loading && !error && !stats.length" class="state-text">
+      Aún no hay votos registrados.
+    </p>
+  </div>
+</div>
+
+

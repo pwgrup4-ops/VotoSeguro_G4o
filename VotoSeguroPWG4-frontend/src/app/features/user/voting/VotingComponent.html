@@ -1,0 +1,26 @@
+
+<div class="page-container">
+  <div class="card">
+    <div class="card-header">
+      <h1>Confirmar voto</h1>
+
+      <button class="btn-logout" (click)="logout()">
+        Cerrar sesión
+      </button>
+    </div>
+
+    <p *ngIf="loading">Cargando información del candidato...</p>
+    <p *ngIf="error && !loading" class="error">{{ error }}</p>
+
+    <div *ngIf="candidate && !loading && !error">
+      <h2>{{ candidate.name }}</h2>
+      <p>{{ candidate.party }}</p>
+
+      <button class="btn-primary" (click)="confirmVote()">
+        Confirmar voto por {{ candidate.name }}
+      </button>
+      <button class="btn-secondary" (click)="cancel()">Cancelar</button>
+    </div>
+  </div>
+</div>
+

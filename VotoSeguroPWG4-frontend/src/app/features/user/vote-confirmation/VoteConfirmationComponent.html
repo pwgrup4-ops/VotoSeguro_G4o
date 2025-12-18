@@ -1,0 +1,15 @@
+<div class="page-container">
+  <div class="card">
+    <h1>Voto registrado</h1>
+
+    <p *ngIf="candidateName">
+      Has votado por <strong>{{ candidateName }}</strong>.
+    </p>
+
+    <p *ngIf="timestamp">
+      Fecha y hora: {{ timestamp | date:'short' }}
+    </p>
+
+    <button class="btn-primary" (click)="volver()">Volver al inicio</button>
+  </div>
+</div>

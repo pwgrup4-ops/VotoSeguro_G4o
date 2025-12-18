@@ -1,0 +1,26 @@
+
+
+<div class="page-container">
+  <div class="card">
+    <h1>Ya has votado</h1>
+
+    <p *ngIf="candidateName">
+      Tu voto fue por <strong>{{ candidateName }}</strong>.
+    </p>
+
+    <p *ngIf="timestamp">
+      Fecha y hora: {{ timestamp | date:'short' }}
+    </p>
+
+    <div class="actions">
+      <button class="btn-primary" (click)="logout()">
+        Cerrar sesión y volver al inicio
+      </button>
+
+      <button class="btn-secondary" (click)="goToResults()">
+        Ver resultados de la votación
+      </button>
+    </div>
+  </div>
+</div>
+

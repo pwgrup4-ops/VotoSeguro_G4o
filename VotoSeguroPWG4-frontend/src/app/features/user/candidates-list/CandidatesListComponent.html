@@ -1,0 +1,44 @@
+
+<div class="candidates-page">
+  <div class="page-header">
+    <h2>Candidatos disponibles</h2>
+
+    <button class="btn-logout" (click)="logout()">
+      Cerrar sesión
+    </button>
+  </div>
+
+  <p *ngIf="loading">Cargando candidatos...</p>
+  <p class="error" *ngIf="error">{{ error }}</p>
+
+  <div class="cards" *ngIf="!loading && candidates.length; else noCandidates">
+    <div class="card" *ngFor="let c of candidates" (click)="goToVote(c.id)">
+      <div class="card-header">
+        <img class="photo" [src]="c.photoUrl" [alt]="c.name" />
+        <div class="info">
+          <h3>{{ c.name }}</h3>
+          <p class="party">{{ c.party }}</p>
+        </div>
+        <img class="logo" [src]="c.logoUrl" [alt]="c.party" />
+      </div>
+
+      <div class="card-body">
+        <h4>Propuestas</h4>
+        <ul>
+          <li *ngFor="let p of c.proposals">{{ p }}</li>
+        </ul>
+      </div>
+
+      <div class="card-footer">
+       <!-- <span class="label">Votos actuales:</span>-->
+        <!--<span class="value">{{ c.voteCount ?? 0 }}</span>-->
+      </div>
+    </div>
+  </div>
+
+  <ng-template #noCandidates>
+    <p>No hay candidatos disponibles en este momento.</p>
+  </ng-template>
+</div>
+
+
