@@ -1,114 +1,249 @@
 
 
+:host {
+  display: block;
+}
+
+
 .results-wrapper {
+  --bg0: #070b14;
+  --bg1: #0b1220;
+
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface2: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.72);
+
+  --primary: #4f8cff;
+  --primary2: #3b76f6;
+  --danger: #ff5a6a;
+
   min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
-  padding: 40px 16px;
-  background: #f3f4f6;
+  padding: 48px 16px;
+  box-sizing: border-box;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fondo elegante tipo dashboard */
+  background:
+    radial-gradient(900px 520px at 12% 8%, rgba(79, 140, 255, 0.22), transparent 55%),
+    radial-gradient(700px 420px at 92% 0%, rgba(255, 90, 106, 0.14), transparent 60%),
+    radial-gradient(640px 420px at 70% 95%, rgba(112, 255, 198, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
 }
 
+/* ====== Card ====== */
 .results-card {
   width: 100%;
-  max-width: 960px;
-  background: #ffffff;
-  border-radius: 16px;
-  box-shadow: 0 18px 45px rgba(15, 23, 42, 0.08);
-  padding: 24px 32px 32px;
+  max-width: 980px;
+  border-radius: 18px;
+  padding: 22px 22px 26px;
+
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+
+  position: relative;
+  overflow: hidden;
 }
 
-/* header con botón regresar */
+/* brillo sutil */
+.results-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(520px 240px at 18% 8%, rgba(79, 140, 255, 0.20), transparent 60%),
+    radial-gradient(420px 220px at 95% 0%, rgba(255, 90, 106, 0.10), transparent 55%);
+  pointer-events: none;
+}
+
+.results-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== Header ====== */
 .card-header {
-  display: flex;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
   align-items: center;
-  justify-content: center;
-  gap: 16px;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 12px;
 }
 
-.btn-back {
-  align-self: flex-start;
-  border: none;
-  background: #e5e7eb;
-  color: #111827;
-  padding: 6px 14px;
-  border-radius: 999px;
-  font-size: 13px;
-  cursor: pointer;
-  transition: background 0.2s ease, transform 0.1s ease;
-}
-
-.btn-back:hover {
-  background: #d1d5db;
-  transform: translateY(-1px);
-}
-
+/* para que el título quede centrado real aunque exista botón */
 .card-title {
-  flex: 1;
   text-align: center;
 }
 
-h2 {
-  font-size: 22px;
-  font-weight: 700;
-  color: #111827;
-  margin: 0 0 4px;
+.card-title h2 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: rgba(255, 255, 255, 0.95);
 }
 
 .subtitle {
-  font-size: 14px;
-  color: #6b7280;
-  margin: 0 0 16px;
+  margin: 6px 0 0;
+  font-size: 0.95rem;
+  color: var(--muted);
 }
 
+.subtitle strong {
+  color: rgba(255, 255, 255, 0.95);
+}
+
+/* ====== Back button ====== */
+.btn-back {
+  border: 1px solid rgba(255,255,255,0.16);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.9);
+  padding: 8px 14px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.btn-back:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.10);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.18);
+}
+
+.btn-back:active {
+  transform: translateY(0);
+}
+
+/* columna extra para centrar */
+.card-header::after {
+  content: "";
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+}
+
+/* ====== States ====== */
 .state-text {
   text-align: center;
-  font-size: 14px;
-  color: #4b5563;
+  font-size: 0.95rem;
+  color: var(--muted);
+  padding: 10px 0;
 }
 
 .state-text.error {
-  color: #dc2626;
+  color: rgba(255,255,255,0.92);
+  background: rgba(255, 90, 106, 0.14);
+  border: 1px solid rgba(255, 90, 106, 0.25);
+  border-radius: 14px;
+  padding: 12px 14px;
 }
 
+/* ====== Bars ====== */
 .bar-row {
-  margin-top: 20px;
+  margin-top: 16px;
+  padding: 14px 14px 12px;
+  border-radius: 16px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.05);
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.bar-row:hover {
+  transform: translateY(-1px);
+  background: rgba(255,255,255,0.07);
+  border-color: rgba(255,255,255,0.18);
 }
 
 .bar-header {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  margin-bottom: 6px;
+  align-items: flex-end;
+  gap: 12px;
+  margin-bottom: 10px;
 }
 
 .candidate-name {
-  font-weight: 600;
-  color: #111827;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.95);
 }
 
 .candidate-party {
-  font-size: 12px;
-  color: #6b7280;
+  margin-top: 2px;
+  font-size: 0.82rem;
+  color: var(--muted);
 }
 
 .candidate-values {
-  font-size: 13px;
-  color: #111827;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.88);
+  white-space: nowrap;
 }
 
+/* Barra fondo */
 .bar-bg {
   width: 100%;
   height: 12px;
   border-radius: 999px;
-  background: #e5e7eb;
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.10);
   overflow: hidden;
 }
 
+/* Barra fill */
 .bar-fill {
   height: 100%;
   border-radius: 999px;
-  background: linear-gradient(90deg, #2563eb, #4f46e5);
-  transition: width 0.4s ease-out;
+  background: linear-gradient(90deg, var(--primary), var(--primary2));
+  transition: width 0.45s ease-out;
+  position: relative;
+}
+
+/* brillo en la barra */
+.bar-fill::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, rgba(255,255,255,0.25), transparent 45%, rgba(255,255,255,0.12));
+  opacity: 0.35;
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 720px) {
+  .results-card {
+    padding: 18px 14px 20px;
+  }
+
+  .card-header {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+
+  .btn-back {
+    width: 100%;
+  }
+
+  .card-header::after {
+    display: none;
+  }
+
+  .bar-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .candidate-values {
+    white-space: normal;
+  }
 }
 

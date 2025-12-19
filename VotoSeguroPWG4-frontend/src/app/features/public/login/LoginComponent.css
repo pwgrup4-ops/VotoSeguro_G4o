@@ -1,75 +1,221 @@
+
+:host {
+  display: block;
+}
+
+/* ====== Layout / Theme ====== */
 .auth-container {
+  --bg0: #070b14;
+  --bg1: #0b1220;
+
+  --card: rgba(255, 255, 255, 0.08);
+  --card2: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.72);
+
+  --primary: #4f8cff;
+  --primary2: #3b76f6;
+  --danger: #ff5a6a;
+
   min-height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  background: #f5f5f5;
-}
 
-.auth-card {
-  background: white;
-  padding: 2.5rem 3rem;
-  border-radius: 12px;
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-  width: 100%;
-  max-width: 420px;
+  padding: 56px 16px;
+  box-sizing: border-box;
   font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  color: var(--text);
+
+  /* Fondo elegante tipo app moderna */
+  background:
+    radial-gradient(900px 520px at 12% 8%, rgba(79, 140, 255, 0.25), transparent 55%),
+    radial-gradient(700px 420px at 92% 0%, rgba(255, 90, 106, 0.14), transparent 60%),
+    radial-gradient(640px 420px at 70% 95%, rgba(112, 255, 198, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
 }
 
-h2 {
-  margin-bottom: 1.5rem;
+/* ====== Card ====== */
+.auth-card {
+  width: 100%;
+  max-width: 440px;
+
+  border-radius: 18px;
+  padding: 28px 26px;
+
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 55px rgba(0, 0, 0, 0.28);
+
+  position: relative;
+  overflow: hidden;
+}
+
+/* brillo sutil */
+.auth-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(520px 240px at 18% 8%, rgba(79, 140, 255, 0.22), transparent 60%),
+    radial-gradient(420px 220px at 95% 0%, rgba(255, 90, 106, 0.10), transparent 55%);
+  pointer-events: none;
+}
+
+.auth-card > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ====== Title ====== */
+.auth-card h2 {
+  margin: 0 0 18px 0;
   text-align: center;
+  font-size: 1.4rem;
+  font-weight: 900;
+  letter-spacing: 0.2px;
+}
+
+/* ====== Form ====== */
+form {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
 }
 
 .form-group {
-  margin-bottom: 1rem;
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  margin-bottom: 0; /* lo controlamos con gap */
 }
 
 label {
-  margin-bottom: 0.25rem;
-  font-size: 0.9rem;
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 650;
 }
 
 input {
-  padding: 0.6rem 0.75rem;
-  border-radius: 6px;
-  border: 1px solid #ccc;
+  padding: 0.7rem 0.85rem;
+  border-radius: 12px;
+
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.06);
+  color: rgba(255,255,255,0.92);
+
   font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.15s ease, background 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
 }
 
-button {
+input::placeholder {
+  color: rgba(255,255,255,0.55);
+}
+
+input:focus {
+  border-color: rgba(79, 140, 255, 0.55);
+  background: rgba(255,255,255,0.08);
+  box-shadow: 0 0 0 4px rgba(79, 140, 255, 0.18);
+}
+
+/* ====== Button ====== */
+button[type="submit"] {
   width: 100%;
-  margin-top: 1rem;
-  padding: 0.7rem;
-  border-radius: 6px;
-  border: none;
-  background: #1976d2;
-  color: white;
-  font-weight: 600;
+  margin-top: 4px;
+
+  padding: 0.8rem 1rem;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.16);
+
+  background: linear-gradient(180deg, var(--primary) 0%, var(--primary2) 100%);
+  color: #fff;
+
+  font-weight: 850;
+  font-size: 0.95rem;
   cursor: pointer;
+
+  box-shadow: 0 12px 26px rgba(79, 140, 255, 0.24);
+  transition: transform 0.15s ease, box-shadow 0.15s ease, filter 0.15s ease;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  filter: brightness(1.05);
+  box-shadow: 0 16px 34px rgba(79, 140, 255, 0.30);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
 }
 
 button:disabled {
-  opacity: 0.7;
-  cursor: default;
+  opacity: 0.55;
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+  filter: none;
+}
+
+/* ====== Errors ====== */
+.field-error {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 90, 106, 0.14);
+  border: 1px solid rgba(255, 90, 106, 0.25);
+  padding: 8px 10px;
+  border-radius: 12px;
+  font-size: 0.82rem;
 }
 
 .error {
-  margin-top: 0.5rem;
-  color: #d32f2f;
-  font-size: 0.85rem;
-}
-
-.link {
-  margin-top: 1rem;
-  text-align: center;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 90, 106, 0.14);
+  border: 1px solid rgba(255, 90, 106, 0.25);
+  padding: 10px 12px;
+  border-radius: 14px;
   font-size: 0.9rem;
 }
 
-.field-error {
-  color: #c62828;
-  font-size: 12px;
-  margin-top: 4px;
+/* Tu HTML tiene este div duplicado, lo estilizo también sin romper nada */
+.error-message {
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 90, 106, 0.14);
+  border: 1px solid rgba(255, 90, 106, 0.25);
+  padding: 10px 12px;
+  border-radius: 14px;
+  font-size: 0.9rem;
 }
+
+/* ====== Link ====== */
+.link {
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.link a {
+  color: rgba(79, 140, 255, 0.95);
+  font-weight: 800;
+  text-decoration: none;
+  padding: 2px 4px;
+  border-radius: 8px;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.link a:hover {
+  background: rgba(79, 140, 255, 0.14);
+  color: rgba(255,255,255,0.92);
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 520px) {
+  .auth-card {
+    padding: 22px 18px;
+    border-radius: 16px;
+  }
+}
+
