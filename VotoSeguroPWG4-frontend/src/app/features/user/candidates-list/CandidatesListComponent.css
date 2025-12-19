@@ -1,57 +1,141 @@
 
 .candidates-page {
-  max-width: 960px;
+  --bg0: #070b14;
+  --bg1: #0b1220;
+
+  --surface: rgba(255, 255, 255, 0.08);
+  --surface2: rgba(255, 255, 255, 0.12);
+  --border: rgba(255, 255, 255, 0.14);
+
+  --text: rgba(255, 255, 255, 0.92);
+  --muted: rgba(255, 255, 255, 0.72);
+
+  --primary: #4f8cff;
+  --primary2: #3b76f6;
+
+  --danger: #ff5a6a;
+
+  max-width: 1020px;
   margin: 0 auto;
-  padding: 24px;
+  padding: 28px 16px 42px;
+  box-sizing: border-box;
+  color: var(--text);
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  /* Fondo elegante (sin tocar HTML) */
+  background:
+    radial-gradient(900px 520px at 12% 8%, rgba(79, 140, 255, 0.22), transparent 55%),
+    radial-gradient(700px 420px at 92% 0%, rgba(255, 90, 106, 0.14), transparent 60%),
+    radial-gradient(640px 420px at 70% 95%, rgba(112, 255, 198, 0.10), transparent 60%),
+    linear-gradient(180deg, var(--bg0) 0%, var(--bg1) 100%);
+
+  border-radius: 18px;
 }
 
-/* Header con título y botón */
+/* ====== Header ====== */
 .page-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 12px;
   margin-bottom: 16px;
+
+  padding: 14px 16px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  backdrop-filter: blur(10px);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.25);
 }
 
+.page-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: 850;
+  letter-spacing: 0.2px;
+}
+
+/* ====== Logout button ====== */
 .btn-logout {
-  background: transparent;
-  border: 1px solid #e53935;
-  color: #e53935;
-  padding: 6px 14px;
-  border-radius: 20px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255, 90, 106, 0.35);
+  color: rgba(255, 255, 255, 0.92);
+  padding: 8px 14px;
+  border-radius: 999px;
   font-size: 13px;
+  font-weight: 750;
   cursor: pointer;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .btn-logout:hover {
-  background: #ffebee;
+  transform: translateY(-1px);
+  background: rgba(255, 90, 106, 0.12);
+  border-color: rgba(255, 90, 106, 0.55);
+  box-shadow: 0 12px 22px rgba(0,0,0,0.18);
 }
 
+.btn-logout:active {
+  transform: translateY(0);
+}
+
+/* ====== Cards grid ====== */
 .cards {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
   gap: 16px;
+  margin-top: 10px;
 }
 
+/* ====== Card ====== */
 .card {
-  background: #ffffff;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
   cursor: pointer;
-  transition: transform 0.1s, box-shadow 0.1s;
+  position: relative;
+  overflow: hidden;
+
+  border: 1px solid var(--border);
+  background: linear-gradient(180deg, rgba(255,255,255,0.10), rgba(255,255,255,0.06));
+  backdrop-filter: blur(10px);
+
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.22);
+  transition: transform 0.16s ease, box-shadow 0.16s ease, border-color 0.16s ease, filter 0.16s ease;
+}
+
+/* brillo suave */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  background:
+    radial-gradient(520px 240px at 15% 10%, rgba(79, 140, 255, 0.18), transparent 60%),
+    radial-gradient(420px 220px at 95% 0%, rgba(255, 90, 106, 0.10), transparent 55%);
+  pointer-events: none;
+}
+
+.card > * {
+  position: relative;
+  z-index: 1;
 }
 
 .card:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+  border-color: rgba(255,255,255,0.22);
+  box-shadow: 0 22px 55px rgba(0, 0, 0, 0.28);
+  filter: brightness(1.02);
 }
 
+.card:active {
+  transform: translateY(-1px);
+}
+
+/* ====== Card header ====== */
 .card-header {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
+  margin-bottom: 10px;
 }
 
 .photo {
@@ -59,53 +143,98 @@
   height: 56px;
   border-radius: 999px;
   object-fit: cover;
+
+  border: 2px solid rgba(255,255,255,0.22);
+  box-shadow: 0 10px 22px rgba(0,0,0,0.22);
 }
 
 .logo {
-  width: 40px;
-  height: 40px;
+  width: 44px;
+  height: 44px;
   object-fit: contain;
   margin-left: auto;
+  opacity: 0.95;
+
+  padding: 6px;
+  border-radius: 12px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
 }
 
+/* ====== Typography ====== */
 .info h3 {
   margin: 0;
-  font-size: 16px;
+  font-size: 1.02rem;
+  font-weight: 850;
+  letter-spacing: 0.2px;
 }
 
 .party {
-  margin: 0;
-  font-size: 13px;
-  color: #4b5563;
+  margin: 2px 0 0;
+  font-size: 0.86rem;
+  color: var(--muted);
 }
 
+/* ====== Body ====== */
 .card-body h4 {
-  margin: 8px 0 4px;
-  font-size: 14px;
+  margin: 10px 0 6px;
+  font-size: 0.92rem;
+  font-weight: 850;
+  letter-spacing: 0.2px;
+  color: rgba(255,255,255,0.88);
 }
 
 .card-body ul {
   padding-left: 18px;
   margin: 0;
-  font-size: 13px;
+  font-size: 0.9rem;
+  color: rgba(255,255,255,0.80);
+  line-height: 1.55;
 }
 
+.card-body li {
+  margin: 6px 0;
+}
+
+/* ====== Footer (aunque esté vacío, no rompe) ====== */
 .card-footer {
-  margin-top: 8px;
-  font-size: 13px;
+  margin-top: 10px;
+  font-size: 0.86rem;
   display: flex;
   justify-content: space-between;
+  color: var(--muted);
 }
 
-.label {
-  color: #6b7280;
-}
-
-.value {
-  font-weight: 600;
-}
-
+/* ====== Error ====== */
 .error {
-  color: #c62828;
+  margin-top: 12px;
+  color: rgba(255, 255, 255, 0.92);
+  background: rgba(255, 90, 106, 0.14);
+  border: 1px solid rgba(255, 90, 106, 0.25);
+  padding: 0.85rem 1rem;
+  border-radius: 14px;
 }
+
+/* textos sueltos */
+p {
+  color: var(--muted);
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 768px) {
+  .candidates-page {
+    padding: 18px 12px 28px;
+    border-radius: 14px;
+  }
+
+  .page-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .btn-logout {
+    width: 100%;
+  }
+}
+
 

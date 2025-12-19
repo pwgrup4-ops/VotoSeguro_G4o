@@ -10,11 +10,10 @@ import { CandidatesListComponent } from './features/user/candidates-list/Candida
 import { VotingComponent } from './features/user/voting/VotingComponent';
 import { VoteConfirmationComponent } from './features/user/vote-confirmation/VoteConfirmationComponent';
 import { AlreadyVotedComponent } from './features/user/already-voted/AlreadyVotedComponent';
-import { VoterDashboardComponent } from './features/user/voter-dashboard/voter-dashboard'; // ← NUEVO
+import { VoterDashboardComponent } from './features/user/voter-dashboard/voter-dashboard';
 
 // Admin
 import { DashboardComponent } from './features/admin/dashboard/DashboardComponent';
-import { ReportsComponent } from './features/admin/reports/ReportsComponent';
 import { UserListComponent } from './features/admin/user-list/UserListComponent';
 import { CandidatesListComponent as AdminCandidatesListComponent } from './features/admin/candidate-list/CandidatesListComponent';
 import { CandidateFormComponent } from './features/admin/candidate-form/CandidateFormComponent';
@@ -37,7 +36,7 @@ export const routes: Routes = [
       { path: 'voting/:id', component: VotingComponent, canActivate: [alreadyVotedGuard] },
       { path: 'vote-confirmation', component: VoteConfirmationComponent },
       { path: 'already-voted', component: AlreadyVotedComponent },
-      { path: 'dashboard', component: VoterDashboardComponent } // ← NUEVA
+      { path: 'dashboard', component: VoterDashboardComponent }
     ]
   },
 
@@ -48,7 +47,6 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       { path: 'dashboard', component: DashboardComponent },
-      { path: 'reports', component: ReportsComponent },
       { path: 'users', component: UserListComponent },
       { path: 'candidates', component: AdminCandidatesListComponent },
       { path: 'candidates/new', component: CandidateFormComponent },

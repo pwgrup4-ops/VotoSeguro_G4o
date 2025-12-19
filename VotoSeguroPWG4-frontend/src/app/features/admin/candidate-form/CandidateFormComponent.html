@@ -1,43 +1,67 @@
 
 <div class="page">
   <div class="header">
-    <h2>{{ isEditMode ? 'Editar candidato' : 'Nuevo candidato' }}</h2>
+    <div class="header-left">
+      <h2 class="title">{{ isEditMode ? 'Editar candidato' : 'Nuevo candidato' }}</h2>
+      <p class="subtitle">Completa los datos del candidato y guarda los cambios.</p>
+    </div>
+
     <button class="btn-secondary" [routerLink]="['/admin/candidates']">
-      Volver a la lista
+      ← Volver a la lista
     </button>
   </div>
 
   <form [formGroup]="candidateForm" (ngSubmit)="onSubmit()" class="card">
-    <div class="form-row">
-      <label for="name">Nombre del candidato</label>
-      <input id="name" type="text" formControlName="name" />
+    <div class="card-head">
+      <h3 class="card-title">Información general</h3>
+      <span class="chip" [class.edit]="isEditMode">
+        {{ isEditMode ? 'Modo edición' : 'Modo creación' }}
+      </span>
     </div>
 
-    <div class="form-row">
-      <label for="party">Partido</label>
-      <input id="party" type="text" formControlName="party" />
+    <div class="grid">
+      <div class="form-row">
+        <label for="name">Nombre del candidato</label>
+        <input id="name" type="text" formControlName="name" placeholder="Ej: Juan Pérez" />
+      </div>
+
+      <div class="form-row">
+        <label for="party">Partido</label>
+        <input id="party" type="text" formControlName="party" placeholder="Ej: Partido X" />
+      </div>
+
+      <div class="form-row">
+        <label for="photoUrl">URL de la foto</label>
+        <input id="photoUrl" type="text" formControlName="photoUrl" placeholder="https://..." />
+        <small class="hint">Se mostrará como foto principal del candidato.</small>
+      </div>
+
+      <div class="form-row">
+        <label for="logoUrl">URL del logo</label>
+        <input id="logoUrl" type="text" formControlName="logoUrl" placeholder="https://..." />
+        <small class="hint">Se usará como logo del partido.</small>
+      </div>
     </div>
 
-    <div class="form-row">
-      <label for="photoUrl">URL de la foto</label>
-      <input id="photoUrl" type="text" formControlName="photoUrl" />
-    </div>
-
-    <div class="form-row">
-      <label for="logoUrl">URL del logo</label>
-      <input id="logoUrl" type="text" formControlName="logoUrl" />
-    </div>
+    <div class="divider"></div>
 
     <div class="form-row">
       <label for="proposalsText">Propuestas (una por línea)</label>
-      <textarea id="proposalsText" rows="6" formControlName="proposalsText"></textarea>
+      <textarea
+        id="proposalsText"
+        rows="7"
+        formControlName="proposalsText"
+        placeholder="• Propuesta 1&#10;• Propuesta 2&#10;• Propuesta 3"
+      ></textarea>
     </div>
 
-    <div class="error" *ngIf="submitError">
+    <div class="message error" *ngIf="submitError">
+      <span class="dot"></span>
       {{ submitError }}
     </div>
 
-    <div class="success" *ngIf="successMessage">
+    <div class="message success" *ngIf="successMessage">
+      <span class="dot"></span>
       {{ successMessage }}
     </div>
 
@@ -47,16 +71,14 @@
         class="btn-primary"
         [disabled]="loadingSubmit || candidateForm.invalid"
       >
+        <span class="btn-shine"></span>
         {{ isEditMode ? 'Guardar cambios' : 'Crear candidato' }}
       </button>
 
-      <button
-        type="button"
-        class="btn-secondary"
-        [routerLink]="['/admin/candidates']"
-      >
+      <button type="button" class="btn-secondary" [routerLink]="['/admin/candidates']">
         Cancelar
       </button>
     </div>
   </form>
 </div>
+
